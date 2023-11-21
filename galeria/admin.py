@@ -11,7 +11,7 @@ class CargoAdmin(admin.ModelAdmin):
     # Busca pelo nome.
     search_fields = ('nome',)
     # Filtro pela tupla feita em models.
-    list_filter = ('categoria',)
+    list_filter = ('categoria', "usuario")
     # Quantidade de pagina.
     list_per_page = 10
     # ...

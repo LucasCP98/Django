@@ -1,8 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from galeria.models import Fotografia
+from django.contrib import messages
 
 
 def index(request):
+    # Só vai para index quem está logado.
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não logado")
+        return redirect('login')
     # Faz com que no admin quando clique em publicar apareça no site. O order_by, ordena
     # por onde deve começar, nesse caso pela fotografia, no site a data mais antiga vem primeiro.
     # Se eu colocar um sinal de - ex: order_by('-data_fotografia') a ordem inverte.
@@ -17,6 +22,11 @@ def imagem(request, foto_id):
 
 
 def buscar(request):
+    # Só vai para index quem está logado.
+    if not request.user.is_authenticated:
+        messages.error(request, "Usuário não logado")
+        return redirect('login')
+
     fotografias = Fotografia.objects.order_by('data_fotografia').filter(publicada=True)
     if "buscar" in request.GET:
         nome_a_buscar = request.GET['buscar']

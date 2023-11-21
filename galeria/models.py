@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.db import models
 
+from django.contrib.auth.models import User
+
 
 class Fotografia(models.Model):
     OPCOES_CATEGORIA = [
@@ -18,6 +20,13 @@ class Fotografia(models.Model):
     # Conseguirei fazer upload de fotos, o blank diz que posso cadastra e não colocar nenhuma img.
     publicada = models.BooleanField(default=False)
     data_fotografia = models.DateTimeField(default=datetime.now, blank=False)
+    usuario = models.ForeignKey(
+        to=User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=False,
+        related_name="user"
+    )
 
     def __str__(self):
         return self.nome
