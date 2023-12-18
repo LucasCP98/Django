@@ -18,7 +18,7 @@ class Fotografia(models.Model):
     descricao = models.TextField(null=False, blank=False)
     foto = models.ImageField(upload_to="fotos/%Y/%m/%d", blank=True)
     # Conseguirei fazer upload de fotos, o blank diz que posso cadastra e não colocar nenhuma img.
-    publicada = models.BooleanField(default=False)
+    publicada = models.BooleanField(default=True)
     data_fotografia = models.DateTimeField(default=datetime.now, blank=False)
     usuario = models.ForeignKey(
         to=User,
